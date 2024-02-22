@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style>
+    
+        .container{
+            background-color: aliceblue;
+            text-align: center;
+            padding: 20px;
+            width: fit-content;
+            margin: auto;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+        }
+
+        .top-container{
+            margin-bottom: 50px;
+        }
+        .bottom-container{
+            text-align: center;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-container">
+
+    </div>
+    <div class="container">
+        <h1>BMI Calculator</h1>
+        <h2>ByStayFit</h2>
+
+        <form>
+            <input type="text" placeholder="Your Weight" id="weight">
+            <input type="text" placeholder="Your Height" id="height">
+
+            <button>Get Your BMI Score</button>
+
+
+            <p id="result"></p>
+
+
+            <div>
+                <h3>Ranges</h3>
+                <p id="r1">Under Weight: Below 18.6</p>
+                <p id="r2">Normal Range: 18.6 to 24.9</p>
+                <p id="r3">Over Weight: More than 24.9</p>
+            </div>
+        </form>
+    </div>
+
+    <!-- <div class="bottom-container">
+        <span>Create By Parth</span>
+    </div> -->
+
+    <script>
+        let form = document.querySelector("form");
+        
+        form.addEventListener('submit', function(e){
+            e.preventDefault();
+            
+            const height = document.querySelector("#height").value
+            const weight = document.querySelector("#weight").value
+
+            const result = document.querySelector('#result');
+
+            if(height === '' || height <= 0 || isNaN(height)){
+                result.innerHTML = "Enter Valid Height"
+            }
+            else if(weight === '' || weight <= 0 || isNaN(weight)){
+                result.innerHTML = "Enter Valid Weight"
+            }
+            else{
+                let output = (weight / ((height * height) / 10000)).toFixed(2);
+
+                result.innerHTML = `<span>Your Score:  ${output} </span>`
+
+                if(output <= 18.6){
+                    let toHighlight = document.querySelector("#r1");
+
+                    toHighlight.style.color = "red";
+                }
+                else if (output > 18.6 && output <= 24.9){
+                    let toHighlight = document.querySelector("#r2");
+
+                    toHighlight.style.color = "red";
+                }else{
+                    let toHighlight = document.querySelector("#r3");
+
+                    toHighlight.style.color = "red";
+                }
+            }
+        })
+    </script>
+</body>
+</html>
